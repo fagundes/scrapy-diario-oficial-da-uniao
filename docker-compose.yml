@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  sdou:
+    container_name: scrapy-diario-oficial-da-uniao
+    image: eb/sdou-local
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    build:
+      context: .docker/local
+      dockerfile: Dockerfile
+    ports:
+      - '80:3990'
+    volumes:
+      - '.:/opt/sdou'

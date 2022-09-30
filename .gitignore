@@ -127,3 +127,6 @@ dmypy.json
 # result files
 result.json
 *.jl
+
+# IDEs
+.idea/
