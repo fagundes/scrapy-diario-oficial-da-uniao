@@ -15,7 +15,7 @@ class Dou(scrapy.Spider):
 
     def start_requests(self):
         url = self.base_url + "?data=" + self.data + "&secao=" + self.secao
-        yield scrapy.Request(url, self.parse)
+        yield scrapy.Request(url, callback=self.parse)
 
     def parse(self, response):
         urls = []

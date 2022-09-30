@@ -12,9 +12,9 @@ import os.path
 runner  = CrawlerRunner(
     {
         'USER_AGENT': 'Sinayra-meuCrawlerComScrapy/1.1 (sinayra@hotmail.com)',
-        'LOG_STDOUT': False,
-        'LOG_ENABLED': True,
-        'ROBOTSTXT_OBEY' : True,
+        'LOG_STDOUT': True,
+        'LOG_ENABLED': False,
+        'ROBOTSTXT_OBEY' : False,
         'RANDOMIZE_DOWNLOAD_DELAY': True,
         'CONCURRENT_REQUESTS': 5,
         'RETRY_TIMES' : 5,
@@ -29,10 +29,12 @@ runner  = CrawlerRunner(
     }
 )
 
-crawlDou(runner, "07-08-2020", "dou3")
+data = "14-09-2022"
+
+crawlDou(runner, data, "dou2")
 reactor.run()  # the script will block here until the last crawl call is finished
 
 if (os.path.exists("items.jl")):
-    writeResult("result.json", "items.jl")
+    writeResult("result" + data + ".json", "items.jl")
 else:
     raise FileNotFoundError("Required files not found. Try again later")
