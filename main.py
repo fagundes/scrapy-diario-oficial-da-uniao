@@ -7,6 +7,18 @@ import loggerConfig
 from crawlDou import crawlDou
 from writeResult import writeResult
 import os.path
+import sys
+from datetime import date
+
+if(len(sys.argv) < 2):
+    raise ArgumentError("usage: main.py dou-section [dou-date]")
+
+sectionArg = sys.argv[1]
+
+if(len(sys.argv) == 3):
+    dateArg = sys.argv[2]
+else:
+    dateArg = date.today().strftime('%d-%m-%Y')
 
 # create a crawler process with the specified settings
 runner  = CrawlerRunner(
@@ -29,12 +41,11 @@ runner  = CrawlerRunner(
     }
 )
 
-data = "14-09-2022"
 
-crawlDou(runner, data, "dou2")
+crawlDou(runner, dateArg, sectionArg)
 reactor.run()  # the script will block here until the last crawl call is finished
 
 if (os.path.exists("items.jl")):
-    writeResult("result" + data + ".json", "items.jl")
+    writeResult("output/result-" + dateArg + "-" + sectionArg + ".json", "items.jl")
 else:
     raise FileNotFoundError("Required files not found. Try again later")

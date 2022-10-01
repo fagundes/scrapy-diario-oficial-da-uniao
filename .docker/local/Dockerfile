@@ -15,9 +15,10 @@ RUN pip install Scrapy
 RUN pip install json-lines
 
 WORKDIR /opt/sdou
-#EXPOSE 3990
 
 COPY start-container.sh /usr/local/bin/start-container
 RUN chmod +x /usr/local/bin/start-container
 
-CMD  [ "start-container" ]
+COPY . /opt/sdou
+
+CMD  [ "bash" ]
