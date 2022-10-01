@@ -112,3 +112,20 @@ else:
 ```
 
 Por último, verifica-se se os arquivos temporários que foram gerados na etapa de *crawler* foram criados. Se foram, escreve o resultado no arquivo `result.json` a partir do arquivo `items.jl`, removendo este logo em seguida.
+
+## Executando via Docker
+
+Considerando que você tenha um ambiente com o `docker` e `docker-compose` instalado, vá para a raiz do projeto e execute o seguinte:
+
+```bash
+# criar a imagem e iniciar o container tendo como base o arquivo docker-composer.yml
+docker-compose up -d 
+
+# executar o scrapy para um determinado dia e secao do DOU
+# neste exemplo temos:
+# - sdou como o nome do container
+# - dou2 como a secao 2 do dou a ser buscado
+# - 30-09-2022 como a data do dou a ser buscado
+# - como saida é esperado o arquivo output/result-30-09-2022.json
+docker exec sdou python3 main.py dou2 30-09-2022
+```
